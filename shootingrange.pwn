@@ -33,6 +33,9 @@
 #define MAX_TARGETS 4
 #define MAX_TARGET_OBJECTS 6
 
+#if defined USE_INCOGNITO_STREAMER
+	#define CreateObject CreateDynamicObject
+#endif
 
 /*
  * Enums
@@ -190,9 +193,7 @@ stock ShootingRange_CreateTarget(type, Float:x, Float:y, Float:z)
 
 		targets_array[targetid][e_ta_Object][obj_idx] = CreateObject(targets_data[i][e_ti_Model],
 			x + targets_data[i][e_ti_Pos_X], y + targets_data[i][e_ti_Pos_Y], z + targets_data[i][e_ti_Pos_Z],
-			targets_data[i][e_ti_Pos_rX], targets_data[i][e_ti_Pos_rY], targets_data[i][e_ti_Pos_rZ],
-			300.0
-		);
+			targets_data[i][e_ti_Pos_rX], targets_data[i][e_ti_Pos_rY], targets_data[i][e_ti_Pos_rZ]);
 	}
 	return targetid;
 }
