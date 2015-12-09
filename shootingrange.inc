@@ -26,16 +26,19 @@
 #pragma library shootingrange
 
 
+#if defined CreateDynamicObject
+	native ORIG_CreateObject(modelid, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Float:rZ, Float:DrawDistance = 0.0) = CreateObject;
+
+	#define _ALS_CreateObject
+	#define CreateObject CreateDynamicObject
+#endif
+
 /*
  * Params
  */
 
 #define MAX_TARGETS 4
 #define MAX_TARGET_OBJECTS 6
-
-#if defined USE_INCOGNITO_STREAMER
-	#define CreateObject CreateDynamicObject
-#endif
 
 /*
  * Enums
@@ -243,3 +246,11 @@ stock ShootingRange_IsTarget(objectid)
 	}
 	return is_target;
 }
+
+#if defined _ALS_CreateObject
+	#undef CreateObject
+#else
+	#define _ALS_CreateObject
+#endif
+ 
+#define CreateObject ORIG_CreateObject
