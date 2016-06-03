@@ -2,14 +2,14 @@
 
 	About: shooting range system
 	Author: ziggi
-	
+
 	Instalation:
 		Include this file after a_samp.inc
 
 	Useful functions:
 		ShootingRange_CreateTarget(type, Float:x, Float:y, Float:z)
 		ShootingRange_DestroyTarget(targetid)
-	
+
 	Useful callbacks:
 		OnShootingRangeTargetHit(playerid, targetid, bool:destroyed)
 
@@ -23,7 +23,6 @@
 #endif
 
 #define _shootingrange_included
-#pragma library shootingrange
 
 
 #if defined CreateDynamicObject
@@ -141,12 +140,12 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 							obj_count++;
 						}
 					}
-					
+
 					destroyed = obj_count == 0;
 					if (destroyed) {
 						ShootingRange_DestroyTarget(i);
 					}
-					
+
 					CallLocalFunction("OnShootingRangeTargetHit", "iii", playerid, i, destroyed);
 					is_loop_end = true;
 					break;
@@ -252,5 +251,5 @@ stock ShootingRange_IsTarget(objectid)
 #else
 	#define _ALS_CreateObject
 #endif
- 
+
 #define CreateObject ORIG_CreateObject
